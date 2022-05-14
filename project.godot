@@ -9,21 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Reference",
-"class": "FaceMesh128m3",
-"language": "GDScript",
-"path": "res://FaceMesh128m3.gd"
-}, {
-"base": "Reference",
-"class": "FaceMesh32m3",
-"language": "GDScript",
-"path": "res://FaceMesh32m3.gd"
-}, {
-"base": "Reference",
-"class": "FaceMesh64m3",
-"language": "GDScript",
-"path": "res://FaceMesh64m3.gd"
-}, {
 "base": "MeshInstance",
 "class": "FaceWithHiddenMargin",
 "language": "GDScript",
@@ -33,25 +18,10 @@ _global_script_classes=[ {
 "class": "GenerateDataForFaceWithMargin",
 "language": "GDScript",
 "path": "res://GenerateDataForFaceWithMargin.gd"
-}, {
-"base": "Reference",
-"class": "Test",
-"language": "GDScript",
-"path": "res://Test.gd"
-}, {
-"base": "Reference",
-"class": "TestData",
-"language": "GDScript",
-"path": "res://TestData.gd"
 } ]
 _global_script_class_icons={
-"FaceMesh128m3": "",
-"FaceMesh32m3": "",
-"FaceMesh64m3": "",
 "FaceWithHiddenMargin": "",
-"GenerateDataForFaceWithMargin": "",
-"Test": "",
-"TestData": ""
+"GenerateDataForFaceWithMargin": ""
 }
 
 [application]

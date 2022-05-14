@@ -2,8 +2,6 @@ tool
 extends MeshInstance
 class_name FaceWithHiddenMargin
 
-onready var Test = preload("Test.gd").new()
-
 export var normal : Vector3
 
 func spherize(pointOnUnitCube : Vector3):
@@ -51,9 +49,6 @@ func vertex_posn(face_normal : Vector3, percent : Vector2, axisA : Vector3, axis
 
 func generate_mesh(resolution, margin):
 	# var startTime = OS.get_ticks_msec()
-
-	# Simple test of using preloaded class
-	# print(Test.hello())
 	
 	var arrays := []
 	arrays.resize(Mesh.ARRAY_MAX)

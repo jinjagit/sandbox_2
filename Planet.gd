@@ -4,8 +4,6 @@ onready var StatsText = get_node("../Control/CanvasLayer/RichTextLabel")
 onready var Btn = get_node("../Control/CanvasLayer/VBoxContainer/Button")
 onready var MenuRes = get_node("../Control/CanvasLayer/VBoxContainer/MenuButton")
 onready var BtnMode = get_node("../Control/CanvasLayer/VBoxContainer/ButtonMode")
-onready var TestData = preload("res://TestData.gd").new()
-onready var test_data = TestData.some_data()
 onready var GenerateFaceMeshData = preload("res://GenerateDataForFaceWithMargin.gd").new()
 
 var resolution := 32
@@ -22,13 +20,6 @@ var popup
 func _init():
 	VisualServer.set_debug_generate_wireframes(true)
 
-func save(content):
-	# This saves to res:// but is not visible in editor file browser until extension changed.
-	var file = File.new()
-	file.open("res://TestWrite.gd", File.WRITE)
-	file.store_string(content)
-	file.close()
-
 func update_stats_display():
 	update_stats_time = OS.get_ticks_msec()
 	update_stats = true
@@ -43,58 +34,7 @@ func generate_sphere():
 	var endTime = OS.get_ticks_msec()
 	bench_time = (endTime - startTime) / 1000.0
 
-	# write_data()
-
 	update_stats_display()
-
-func write_data():
-	var name = "FaceMesh" + str(resolution) + "m" + str(margin)
-
-	var normals = {
-		"x+1": Vector3(1.0, 0.0, 0.0),
-		"x-1": Vector3(-1.0, 0.0, 0.0),
-		"y+1": Vector3(0.0, 1.0, 0.0),
-		"y-1": Vector3(0.0, -1.0, 0.0),
-		"z+1": Vector3(0.0, 0.0, 1.0),
-		"z-1": Vector3(0.0, 0.0, -1.0)
-	}
-
-	var data_str = ""
-
-	for key in normals:
-		var normal = normals[key]
-		var raw_data = GenerateFaceMeshData.generate_data(resolution, margin, normal)
-
-		var vert_ary = ""
-		for vec in raw_data["vertex_array"]:
-			vert_ary += "                Vector3" + str(vec) + ",\n"
-
-		data_str += "        \"" + str(key) + "\":{\n" + "            \"vertex_array\":[\n" + vert_ary + "            ],\n"
-
-		var norm_ary = ""
-		for vec in raw_data["normal_array"]:
-			norm_ary += "                Vector3" + str(vec) + ",\n"
-
-		data_str += "            \"normal_array\":[\n" + norm_ary + "            ],\n"
-
-		var uv_ary = ""
-		for vec in raw_data["uv_array"]:
-			uv_ary += "                Vector2" + str(vec) + ",\n"
-
-		data_str += "            \"uv_array\":[\n" + uv_ary + "            ],\n"
-
-		var index_ary = ""
-		for vec in raw_data["index_array"]:
-			index_ary += "                " + str(vec) + ",\n"
-
-		data_str += "            \"index_array\":[\n" + index_ary + "            ],\n" + "        },\n"
-
-	var content = "class_name " + str(name) + "\n\n" + "func data():\n" + "    var data = {\n" + data_str + "    }\n\n" + "    return data\n"
-
-	var file = File.new()
-	file.open(name + ".gd", File.WRITE)
-	file.store_string(content)
-	file.close()
 
 func _input(event):
 	if event is InputEventKey and Input.is_key_pressed(KEY_P):
@@ -107,14 +47,7 @@ func _input(event):
 		BtnMode.visible = not BtnMode.visible
 		MenuRes.visible = not MenuRes.visible
 		
-func _ready():
-	# var test_dict = {"one": Vector3(0.1, 1.1, 2.1), "two": [1, 2]}
-	# save(
-	# 	"class_name TestWrite\n\n"
-	# 	+ "func some_data():\n"
-	# 	+ "    return " + str(test_dict)
-	# 	)
-	
+func _ready():	
 	generate_sphere()
 
 	popup = MenuRes.get_popup()
@@ -124,8 +57,6 @@ func _ready():
 	popup.add_item("256")
 
 	popup.connect("id_pressed", self, "_on_item_pressed")
-
-	# print("Data read from TestData.some_data() {v}".format({"v":str(TestData.some_data()["-1"]["b"])}))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -165,7 +96,6 @@ func _on_Button_pressed():
 
 func _on_item_pressed(ID):
 	resolution = int(popup.get_item_text(ID))
-	print(resolution, " pressed (via Planet class)")
 
 	generate_sphere()
 
