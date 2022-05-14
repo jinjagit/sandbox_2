@@ -1,4 +1,4 @@
-class_name GenerateDataForFaceWithMargin
+class_name GenerateFaceMeshData
 
 func spherize(pointOnUnitCube : Vector3):
 	var x2 := pointOnUnitCube.x * pointOnUnitCube.x

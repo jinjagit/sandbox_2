@@ -48,8 +48,6 @@ func vertex_posn(face_normal : Vector3, percent : Vector2, axisA : Vector3, axis
 	return spherize(pointOnUnitCube) if spherized else pointOnUnitCube
 
 func generate_mesh(resolution, margin):
-	# var startTime = OS.get_ticks_msec()
-	
 	var arrays := []
 	arrays.resize(Mesh.ARRAY_MAX)
 
@@ -215,16 +213,6 @@ func generate_mesh(resolution, margin):
 	arrays[Mesh.ARRAY_NORMAL] = normal_array
 	arrays[Mesh.ARRAY_TEX_UV] = uv_array
 	arrays[Mesh.ARRAY_INDEX] = index_array
-
-	# print("n vertices {v}".format({"v":vertex_array.size()}))
-	# print("n triangles {t}".format({"t":index_array.size() / 3.0}))
-	# var pc_vertices : float = (margin * 1.0 * (resolution - 1) * 4) / (res_sq + (margin * (resolution - 1) * 4)) * 100
-	# print("percent vertices in margin {pcv}".format({"pcv":pc_vertices}))
-	# var pc_triangles : float = ((margin * 1.0 * (resolution - 1) * 24) / (((resolution - 1) * (resolution -1) * 6) + (margin * (resolution - 1) * 24))) / 3.0 * 100.0
-	# print("percent triangles in margin {pct}".format({"pct":pc_triangles}))
-
-	# var bench_time = (OS.get_ticks_msec() - startTime) / 1000.0
-	# print (bench_time)
 	
 	call_deferred("_update_mesh", arrays)
 

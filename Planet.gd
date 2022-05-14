@@ -4,7 +4,7 @@ onready var StatsText = get_node("../Control/CanvasLayer/RichTextLabel")
 onready var Btn = get_node("../Control/CanvasLayer/VBoxContainer/Button")
 onready var MenuRes = get_node("../Control/CanvasLayer/VBoxContainer/MenuButton")
 onready var BtnMode = get_node("../Control/CanvasLayer/VBoxContainer/ButtonMode")
-onready var GenerateFaceMeshData = preload("res://GenerateDataForFaceWithMargin.gd").new()
+onready var GenerateFaceMeshData = preload("res://GenerateFaceMeshData.gd").new()
 
 var resolution := 32
 var margin := 3

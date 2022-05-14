@@ -15,13 +15,13 @@ _global_script_classes=[ {
 "path": "res://FaceWithHiddenMargin.gd"
 }, {
 "base": "Reference",
-"class": "GenerateDataForFaceWithMargin",
+"class": "GenerateFaceMeshData",
 "language": "GDScript",
-"path": "res://GenerateDataForFaceWithMargin.gd"
+"path": "res://GenerateFaceMeshData.gd"
 } ]
 _global_script_class_icons={
 "FaceWithHiddenMargin": "",
-"GenerateDataForFaceWithMargin": ""
+"GenerateFaceMeshData": ""
 }
 
 [application]
