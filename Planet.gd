@@ -1,9 +1,8 @@
 extends Spatial
 
 onready var StatsText = get_node("../Control/CanvasLayer/RichTextLabel")
-onready var Btn = get_node("../Control/CanvasLayer/VBoxContainer/Button")
-onready var MenuRes = get_node("../Control/CanvasLayer/VBoxContainer/MenuButton")
-onready var BtnMode = get_node("../Control/CanvasLayer/VBoxContainer/ButtonMode")
+onready var MenuRes = get_node("../Control/CanvasLayer/VBoxLeft/MenuButton")
+onready var Canvas = get_node("../Control/CanvasLayer")
 onready var GenerateFaceMeshData = preload("res://GenerateFaceMeshData.gd").new()
 
 var resolution := 32
@@ -42,10 +41,8 @@ func _input(event):
 		vp.debug_draw = (vp.debug_draw + 1 ) % 4
 		
 	if event is InputEventKey and Input.is_key_pressed(KEY_U):
-		StatsText.visible = not StatsText.visible
-		Btn.visible = not Btn.visible
-		BtnMode.visible = not BtnMode.visible
-		MenuRes.visible = not MenuRes.visible
+		for child in Canvas.get_children():
+			child.visible = not child.visible
 		
 func _ready():	
 	generate_sphere()
