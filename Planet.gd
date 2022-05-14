@@ -1,7 +1,13 @@
 extends Spatial
 
+onready var Up = get_node("./Up")
+onready var Down = get_node("./Down")
+onready var Left = get_node("./Left")
+onready var Right = get_node("./Right")
+onready var Front = get_node("./Front")
+onready var Back = get_node("./Back")
 onready var StatsText = get_node("../Control/CanvasLayer/RichTextLabel")
-onready var MenuRes = get_node("../Control/CanvasLayer/VBoxLeft/MenuButton")
+onready var MenuRes = get_node("../Control/CanvasLayer/VBoxLeft/MenuMeshRes")
 onready var Canvas = get_node("../Control/CanvasLayer")
 onready var GenerateFaceMeshData = preload("res://GenerateFaceMeshData.gd").new()
 
@@ -12,37 +18,11 @@ var bench_time : float = 0.0
 var update_stats = false
 var update_stats_time = 0
 var update_stats_delay = 1000
-var mode: String = 'calculate'
 
 var popup
 
 func _init():
 	VisualServer.set_debug_generate_wireframes(true)
-
-func update_stats_display():
-	update_stats_time = OS.get_ticks_msec()
-	update_stats = true
-
-func generate_sphere():
-	var startTime = OS.get_ticks_msec()
-
-	for child in get_children():
-		var face := child as FaceWithHiddenMargin
-		face.generate_mesh(resolution, margin)
-		
-	var endTime = OS.get_ticks_msec()
-	bench_time = (endTime - startTime) / 1000.0
-
-	update_stats_display()
-
-func _input(event):
-	if event is InputEventKey and Input.is_key_pressed(KEY_P):
-		var vp = get_viewport()
-		vp.debug_draw = (vp.debug_draw + 1 ) % 4
-		
-	if event is InputEventKey and Input.is_key_pressed(KEY_U):
-		for child in Canvas.get_children():
-			child.visible = not child.visible
 		
 func _ready():	
 	generate_sphere()
@@ -69,14 +49,29 @@ func _physics_process(_delta):
 		if update_stats_delay == 1000:
 			update_stats_delay = 100
 
+func generate_sphere():
+	var startTime = OS.get_ticks_msec()
+
+	for child in get_children():
+		var face := child as FaceWithHiddenMargin
+		face.generate_mesh(resolution, margin)
+		
+	var endTime = OS.get_ticks_msec()
+	bench_time = (endTime - startTime) / 1000.0
+
+	update_stats_display()
+
+func update_stats_display():
+	update_stats_time = OS.get_ticks_msec()
+	update_stats = true
+
 func update_stats_text():
 	bench = "time to render: %.3f" % bench_time
 	var num_vertices = ((resolution * resolution) + (margin * (resolution - 1) * 4)) * 6
 	var indices : float = Performance.get_monitor(Performance.RENDER_VERTICES_IN_FRAME)
 
 	StatsText.text = (
-		"Mode: " + mode + "\n\n"
-		+ "FPS: " + str(Performance.get_monitor(Performance.TIME_FPS)) + "\n\n"
+		"FPS: " + str(Performance.get_monitor(Performance.TIME_FPS)) + "\n\n"
 		+ "Memory static:  " + str(round(Performance.get_monitor(Performance.MEMORY_STATIC)/1024/1024)) + " MB\n"
 		+ "Memory dynamic: " + str(round(Performance.get_monitor(Performance.MEMORY_DYNAMIC)/1024/1024)) + " MB\n"
 		+ "Vertex memory:  " + str(round(Performance.get_monitor(Performance.RENDER_VERTEX_MEM_USED)/1024/1024)) + " MB\n"
@@ -87,7 +82,18 @@ func update_stats_text():
 		+ "Mesh vertices:  " + str(num_vertices) + "\n\n"
 		+ bench
 	)
+
+# --------------- UI Actions ------------------------
+
+func _input(event):
+	if event is InputEventKey and Input.is_key_pressed(KEY_P):
+		var vp = get_viewport()
+		vp.debug_draw = (vp.debug_draw + 1 ) % 4
 		
+	if event is InputEventKey and Input.is_key_pressed(KEY_U):
+		for child in Canvas.get_children():
+			child.visible = not child.visible
+	
 func _on_Button_pressed():
 	set_process(not is_processing())
 
@@ -96,10 +102,20 @@ func _on_item_pressed(ID):
 
 	generate_sphere()
 
-func _on_ButtonMode_pressed():
-	if mode == 'calculate':
-		mode = 'read'
-	else:
-		mode = 'calculate'
+func _on_ButtonUp_pressed():
+	Up.visible = not Up.visible
 	
-	update_stats_display()
+func _on_ButtonDown_pressed():
+	Down.visible = not Down.visible
+	
+func _on_ButtonLeft_pressed():
+	Left.visible = not Left.visible
+	
+func _on_ButtonRight_pressed():
+	Right.visible = not Right.visible
+	
+func _on_ButtonFront_pressed():
+	Front.visible = not Front.visible
+	
+func _on_ButtonBack_pressed():
+	Back.visible = not Back.visible

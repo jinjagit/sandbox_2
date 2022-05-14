@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Planet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/fonts/UbuntuMono-Regular.ttf" type="DynamicFontData" id=2]
@@ -25,7 +25,15 @@ font_data = ExtResource( 2 )
 size = 22
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=9]
+size = 22
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 22
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=11]
 size = 22
 font_data = ExtResource( 2 )
 
@@ -73,7 +81,7 @@ margin_right = -12.76
 margin_bottom = 229.0
 custom_fonts/normal_font = SubResource( 3 )
 meta_underlined = false
-text = "Welcome to Sandbox_1!"
+text = "Welcome to Sandbox_2!"
 fit_content_height = true
 
 [node name="VBoxLeft" type="VBoxContainer" parent="Control/CanvasLayer"]
@@ -88,19 +96,19 @@ margin_bottom = 29.0
 custom_fonts/font = SubResource( 1 )
 text = "Rotation"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/CanvasLayer/VBoxLeft"]
+[node name="HBoxAxesRotations" type="HBoxContainer" parent="Control/CanvasLayer/VBoxLeft"]
 margin_top = 33.0
 margin_right = 181.0
 margin_bottom = 62.0
 
-[node name="xSpeedMenu" type="MenuButton" parent="Control/CanvasLayer/VBoxLeft/HBoxContainer"]
+[node name="xSpeedMenu" type="MenuButton" parent="Control/CanvasLayer/VBoxLeft/HBoxAxesRotations"]
 margin_right = 57.0
 margin_bottom = 29.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 6 )
 text = "x"
 
-[node name="ySpeedMenu" type="MenuButton" parent="Control/CanvasLayer/VBoxLeft/HBoxContainer"]
+[node name="ySpeedMenu" type="MenuButton" parent="Control/CanvasLayer/VBoxLeft/HBoxAxesRotations"]
 margin_left = 61.0
 margin_right = 119.0
 margin_bottom = 29.0
@@ -108,7 +116,7 @@ size_flags_horizontal = 3
 custom_fonts/font = SubResource( 7 )
 text = "y"
 
-[node name="zSpeedmenu" type="MenuButton" parent="Control/CanvasLayer/VBoxLeft/HBoxContainer"]
+[node name="zSpeedmenu" type="MenuButton" parent="Control/CanvasLayer/VBoxLeft/HBoxAxesRotations"]
 margin_left = 123.0
 margin_right = 181.0
 margin_bottom = 29.0
@@ -116,20 +124,80 @@ size_flags_horizontal = 3
 custom_fonts/font = SubResource( 8 )
 text = "z"
 
-[node name="ButtonMode" type="Button" parent="Control/CanvasLayer/VBoxLeft"]
+[node name="HBoxFaces1" type="HBoxContainer" parent="Control/CanvasLayer/VBoxLeft"]
 margin_top = 66.0
 margin_right = 181.0
 margin_bottom = 95.0
-custom_fonts/font = SubResource( 5 )
-text = "Mode"
 
-[node name="MenuButton" type="MenuButton" parent="Control/CanvasLayer/VBoxLeft"]
+[node name="ButtonUp" type="Button" parent="Control/CanvasLayer/VBoxLeft/HBoxFaces1"]
+margin_right = 57.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 9 )
+toggle_mode = true
+text = "U"
+
+[node name="ButtonDown" type="Button" parent="Control/CanvasLayer/VBoxLeft/HBoxFaces1"]
+margin_left = 61.0
+margin_right = 119.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 10 )
+toggle_mode = true
+text = "D"
+
+[node name="ButtonLeft" type="Button" parent="Control/CanvasLayer/VBoxLeft/HBoxFaces1"]
+margin_left = 123.0
+margin_right = 181.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 11 )
+toggle_mode = true
+text = "L"
+
+[node name="HBoxFaces2" type="HBoxContainer" parent="Control/CanvasLayer/VBoxLeft"]
 margin_top = 99.0
 margin_right = 181.0
 margin_bottom = 128.0
+
+[node name="ButtonFront" type="Button" parent="Control/CanvasLayer/VBoxLeft/HBoxFaces2"]
+margin_right = 57.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 9 )
+toggle_mode = true
+text = "F"
+
+[node name="ButtonBack" type="Button" parent="Control/CanvasLayer/VBoxLeft/HBoxFaces2"]
+margin_left = 61.0
+margin_right = 119.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 10 )
+toggle_mode = true
+text = "B"
+
+[node name="ButtonRight" type="Button" parent="Control/CanvasLayer/VBoxLeft/HBoxFaces2"]
+margin_left = 123.0
+margin_right = 181.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 11 )
+toggle_mode = true
+text = "R"
+
+[node name="MenuMeshRes" type="MenuButton" parent="Control/CanvasLayer/VBoxLeft"]
+margin_top = 132.0
+margin_right = 181.0
+margin_bottom = 161.0
 theme = ExtResource( 3 )
 custom_fonts/font = SubResource( 4 )
 text = "Mesh resolution"
 
 [connection signal="pressed" from="Control/CanvasLayer/VBoxLeft/Button" to="Planet" method="_on_Button_pressed"]
-[connection signal="pressed" from="Control/CanvasLayer/VBoxLeft/ButtonMode" to="Planet" method="_on_ButtonMode_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/VBoxLeft/HBoxFaces1/ButtonUp" to="Planet" method="_on_ButtonUp_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/VBoxLeft/HBoxFaces1/ButtonDown" to="Planet" method="_on_ButtonDown_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/VBoxLeft/HBoxFaces1/ButtonLeft" to="Planet" method="_on_ButtonLeft_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/VBoxLeft/HBoxFaces2/ButtonFront" to="Planet" method="_on_ButtonFront_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/VBoxLeft/HBoxFaces2/ButtonBack" to="Planet" method="_on_ButtonBack_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/VBoxLeft/HBoxFaces2/ButtonRight" to="Planet" method="_on_ButtonRight_pressed"]
