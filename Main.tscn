@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Planet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/fonts/UbuntuMono-Regular.ttf" type="DynamicFontData" id=2]
@@ -9,7 +9,19 @@ size = 20
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=1]
+size = 22
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 22
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 22
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=8]
 size = 22
 font_data = ExtResource( 2 )
 
@@ -17,7 +29,7 @@ font_data = ExtResource( 2 )
 size = 22
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=4]
 size = 22
 font_data = ExtResource( 2 )
 
@@ -70,26 +82,54 @@ margin_top = 18.0
 margin_right = 204.0
 margin_bottom = 616.0
 
-[node name="MenuButton" type="MenuButton" parent="Control/CanvasLayer/VBoxContainer"]
+[node name="Button" type="Button" parent="Control/CanvasLayer/VBoxContainer"]
 margin_right = 181.0
 margin_bottom = 29.0
+custom_fonts/font = SubResource( 1 )
+text = "Rotation"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/CanvasLayer/VBoxContainer"]
+margin_top = 33.0
+margin_right = 181.0
+margin_bottom = 62.0
+
+[node name="xSpeedMenu" type="MenuButton" parent="Control/CanvasLayer/VBoxContainer/HBoxContainer"]
+margin_right = 57.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 6 )
+text = "x"
+
+[node name="ySpeedMenu" type="MenuButton" parent="Control/CanvasLayer/VBoxContainer/HBoxContainer"]
+margin_left = 61.0
+margin_right = 119.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 7 )
+text = "y"
+
+[node name="zSpeedmenu" type="MenuButton" parent="Control/CanvasLayer/VBoxContainer/HBoxContainer"]
+margin_left = 123.0
+margin_right = 181.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 8 )
+text = "z"
+
+[node name="ButtonMode" type="Button" parent="Control/CanvasLayer/VBoxContainer"]
+margin_top = 66.0
+margin_right = 181.0
+margin_bottom = 95.0
+custom_fonts/font = SubResource( 5 )
+text = "Mode"
+
+[node name="MenuButton" type="MenuButton" parent="Control/CanvasLayer/VBoxContainer"]
+margin_top = 99.0
+margin_right = 181.0
+margin_bottom = 128.0
 theme = ExtResource( 3 )
 custom_fonts/font = SubResource( 4 )
 text = "Resolution"
 
-[node name="ButtonMode" type="Button" parent="Control/CanvasLayer/VBoxContainer"]
-margin_top = 33.0
-margin_right = 181.0
-margin_bottom = 62.0
-custom_fonts/font = SubResource( 5 )
-text = "Mode"
-
-[node name="Button" type="Button" parent="Control/CanvasLayer/VBoxContainer"]
-margin_top = 66.0
-margin_right = 181.0
-margin_bottom = 95.0
-custom_fonts/font = SubResource( 1 )
-text = "Rotation"
-
-[connection signal="pressed" from="Control/CanvasLayer/VBoxContainer/ButtonMode" to="Planet" method="_on_ButtonMode_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/VBoxContainer/Button" to="Planet" method="_on_Button_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/VBoxContainer/ButtonMode" to="Planet" method="_on_ButtonMode_pressed"]
