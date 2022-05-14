@@ -1,0 +1,77 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Reference",
+"class": "FaceMesh128m3",
+"language": "GDScript",
+"path": "res://FaceMesh128m3.gd"
+}, {
+"base": "Reference",
+"class": "FaceMesh32m3",
+"language": "GDScript",
+"path": "res://FaceMesh32m3.gd"
+}, {
+"base": "Reference",
+"class": "FaceMesh64m3",
+"language": "GDScript",
+"path": "res://FaceMesh64m3.gd"
+}, {
+"base": "MeshInstance",
+"class": "FaceWithHiddenMargin",
+"language": "GDScript",
+"path": "res://FaceWithHiddenMargin.gd"
+}, {
+"base": "Reference",
+"class": "GenerateDataForFaceWithMargin",
+"language": "GDScript",
+"path": "res://GenerateDataForFaceWithMargin.gd"
+}, {
+"base": "Reference",
+"class": "Test",
+"language": "GDScript",
+"path": "res://Test.gd"
+}, {
+"base": "Reference",
+"class": "TestData",
+"language": "GDScript",
+"path": "res://TestData.gd"
+} ]
+_global_script_class_icons={
+"FaceMesh128m3": "",
+"FaceMesh32m3": "",
+"FaceMesh64m3": "",
+"FaceWithHiddenMargin": "",
+"GenerateDataForFaceWithMargin": "",
+"Test": "",
+"TestData": ""
+}
+
+[application]
+
+config/name="sandbox_2"
+run/main_scene="res://Main.tscn"
+config/icon="res://assets/images/icon.png"
+
+[input]
+
+U={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":85,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

@@ -1,0 +1,28 @@
+[gd_resource type="Theme" load_steps=3 format=2]
+
+[ext_resource path="res://assets/fonts/UbuntuMono-Regular.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=6]
+size = 22
+font_data = ExtResource( 1 )
+
+[resource]
+PopupMenu/colors/font_color = Color( 1, 1, 1, 1 )
+PopupMenu/colors/font_color_accel = Color( 0, 0, 0, 1 )
+PopupMenu/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+PopupMenu/colors/font_color_hover = Color( 0.85098, 0.85098, 0.85098, 1 )
+PopupMenu/colors/font_color_separator = Color( 0, 0, 0, 1 )
+PopupMenu/constants/hseparation = 0
+PopupMenu/constants/vseparation = 0
+PopupMenu/fonts/font = SubResource( 6 )
+PopupMenu/icons/checked = null
+PopupMenu/icons/radio_checked = null
+PopupMenu/icons/radio_unchecked = null
+PopupMenu/icons/submenu = null
+PopupMenu/icons/unchecked = null
+PopupMenu/styles/hover = null
+PopupMenu/styles/labeled_separator_left = null
+PopupMenu/styles/labeled_separator_right = null
+PopupMenu/styles/panel = null
+PopupMenu/styles/panel_disabled = null
+PopupMenu/styles/separator = null
