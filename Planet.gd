@@ -39,6 +39,9 @@ func _init():
 func _ready():	
 	generate_sphere()
 
+	# Example of calling function in script attached to a specific node.
+	Up.print_normal()
+
 	popup_mesh_res = MenuRes.get_popup()
 	popup_mesh_res.add_item("32")
 	popup_mesh_res.add_item("64")

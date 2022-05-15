@@ -4,6 +4,10 @@ class_name FaceWithHiddenMargin
 
 export var normal : Vector3
 
+# Example function that can be called via reference to a node this script is attached to.
+func print_normal():
+	print("My normal is: {nml}".format({"nml":normal}))
+
 func spherize(pointOnUnitCube : Vector3):
 	var x2 := pointOnUnitCube.x * pointOnUnitCube.x
 	var y2 := pointOnUnitCube.y * pointOnUnitCube.y
