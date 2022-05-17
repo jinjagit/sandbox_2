@@ -6,6 +6,7 @@ onready var Left = get_node("./Left")
 onready var Right = get_node("./Right")
 onready var Front = get_node("./Front")
 onready var Back = get_node("./Back")
+
 onready var FpsText = get_node("../Control/CanvasLayerFPS/RichTextLabelFPS")
 onready var StatsText = get_node("../Control/CanvasLayer/RichTextLabel")
 onready var Canvas = get_node("../Control/CanvasLayer")
@@ -18,15 +19,28 @@ onready var GenerateFaceMeshData = preload("res://GenerateFaceMeshData.gd").new(
 
 var resolution := 32
 var margin := 3
+
+var face_normals = {		
+	"up": Vector3(0.0, 1.0, 0.0),
+	"down": Vector3(0.0, -1.0, 0.0),
+	"left": Vector3(-1.0, 0.0, 0.0),
+	"right": Vector3(1.0, 0.0, 0.0),
+	"front": Vector3(0.0, 0.0, 1.0),
+	"back": Vector3(0.0, 0.0, -1.0)
+}
+
+var face_meshes = {"up": null, "down": null, "left": null, "right": null, "front": null, "back": null}
+
+var x_rot = 0.0
+var y_rot = 1.0
+var z_rot = 0.0
+
 var bench : String = ''
 var bench_time : float = 0.0
 var update_stats = false
 var update_stats_time = 0
 var update_stats_delay = 1000
 var show_fps = true
-var x_rot = 0.0
-var y_rot = 1.0
-var z_rot = 0.0
 
 var popup_mesh_res
 var popup_rot_x
@@ -38,9 +52,6 @@ func _init():
 		
 func _ready():	
 	generate_sphere()
-
-	# Example of calling function in script attached to a specific node.
-	Up.print_normal()
 
 	popup_mesh_res = MenuRes.get_popup()
 	popup_mesh_res.add_item("32")
@@ -75,7 +86,6 @@ func _process(delta):
 	rotate_object_local(Vector3(0, 1, 0), (delta/20) * y_rot)
 	rotate_object_local(Vector3(0, 0, 1), (delta/20) * z_rot)
 
-	
 func _physics_process(_delta):
 	if show_fps == true:
 		FpsText.text = (
@@ -92,9 +102,16 @@ func _physics_process(_delta):
 func generate_sphere():
 	var startTime = OS.get_ticks_msec()
 
-	for child in get_children():
-		var face := child as FaceWithHiddenMargin
-		face.generate_mesh(resolution, margin)
+	for key in face_normals:
+		var normal = face_normals[key]
+		face_meshes[key] = GenerateFaceMeshData.generate_data(resolution, margin, normal)
+
+	Up.render_mesh(face_meshes["up"])
+	Down.render_mesh(face_meshes["down"])
+	Left.render_mesh(face_meshes["left"])
+	Right.render_mesh(face_meshes["right"])
+	Front.render_mesh(face_meshes["front"])
+	Back.render_mesh(face_meshes["back"])
 		
 	var endTime = OS.get_ticks_msec()
 	bench_time = (endTime - startTime) / 1000.0
