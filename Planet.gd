@@ -31,9 +31,7 @@ var face_normals = {
 
 var face_meshes = {"up": null, "down": null, "left": null, "right": null, "front": null, "back": null}
 
-var x_rot = 0.0
-var y_rot = 1.0
-var z_rot = 0.0
+var planet_rot = {"x": 0.0, "y": 1.0, "z": 0.0}
 
 var bench : String = ''
 var bench_time : float = 0.0
@@ -82,9 +80,9 @@ func add_rotation_popup_items(popup_var):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	rotate_object_local(Vector3(1, 0, 0), (delta/20) * x_rot)
-	rotate_object_local(Vector3(0, 1, 0), (delta/20) * y_rot)
-	rotate_object_local(Vector3(0, 0, 1), (delta/20) * z_rot)
+	rotate_object_local(Vector3(1, 0, 0), (delta/20) * planet_rot.x)
+	rotate_object_local(Vector3(0, 1, 0), (delta/20) * planet_rot.y)
+	rotate_object_local(Vector3(0, 0, 1), (delta/20) * planet_rot.z)
 
 func _physics_process(_delta):
 	if show_fps == true:
@@ -128,8 +126,8 @@ func update_stats_text():
 	var indices : float = Performance.get_monitor(Performance.RENDER_VERTICES_IN_FRAME)
 
 	StatsText.text = (
-		"Rotation:\n"
-		+"x: " + str(x_rot) + " y: " + str(y_rot) + " z: " + str(z_rot) + "\n\n"
+		"Palent rotation:\n"
+		+"x: " + str(planet_rot.x) + " y: " + str(planet_rot.y) + " z: " + str(planet_rot.z) + "\n\n"
 		+ "Memory static:   " + str(round(Performance.get_monitor(Performance.MEMORY_STATIC)/1024/1024)) + " MB\n"
 		+ "Memory dynamic:  " + str(round(Performance.get_monitor(Performance.MEMORY_DYNAMIC)/1024/1024)) + " MB\n"
 		+ "Vertex memory:   " + str(round(Performance.get_monitor(Performance.RENDER_VERTEX_MEM_USED)/1024/1024)) + " MB\n"
@@ -164,15 +162,15 @@ func _on_item_pressed(ID):
 	generate_sphere()
 
 func _on_rot_x_pressed(ID):
-	x_rot = float(popup_rot_x.get_item_text(ID))
+	planet_rot.x = float(popup_rot_x.get_item_text(ID))
 	update_stats_display()
 
 func _on_rot_y_pressed(ID):
-	y_rot = float(popup_rot_y.get_item_text(ID))
+	planet_rot.y = float(popup_rot_y.get_item_text(ID))
 	update_stats_display()
 
 func _on_rot_z_pressed(ID):
-	z_rot = float(popup_rot_z.get_item_text(ID))
+	planet_rot.z = float(popup_rot_z.get_item_text(ID))
 	update_stats_display()
 
 func _on_ButtonUp_pressed():
