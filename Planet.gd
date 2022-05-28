@@ -32,6 +32,7 @@ var face_normals = {
 var face_meshes = {"up": null, "down": null, "left": null, "right": null, "front": null, "back": null}
 
 var planet_rot = {"x": 0.0, "y": 1.0, "z": 0.0}
+var planet_rotation = false
 
 var bench : String = ''
 var bench_time : float = 0.0
@@ -78,9 +79,10 @@ func add_rotation_popup_items(popup_var):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	rotate_object_local(Vector3(1, 0, 0), (delta/20) * planet_rot.x)
-	rotate_object_local(Vector3(0, 1, 0), (delta/20) * planet_rot.y)
-	rotate_object_local(Vector3(0, 0, 1), (delta/20) * planet_rot.z)
+	if planet_rotation == true:
+		rotate_object_local(Vector3(1, 0, 0), (delta/20) * planet_rot.x)
+		rotate_object_local(Vector3(0, 1, 0), (delta/20) * planet_rot.y)
+		rotate_object_local(Vector3(0, 0, 1), (delta/20) * planet_rot.z)
 
 func _physics_process(_delta):
 	if show_fps == true:
@@ -124,7 +126,7 @@ func update_stats_text():
 	var indices : float = Performance.get_monitor(Performance.RENDER_VERTICES_IN_FRAME)
 
 	StatsText.text = (
-		"Palent rotation:\n"
+		"Planet rotation:\n"
 		+"x: " + str(planet_rot.x) + " y: " + str(planet_rot.y) + " z: " + str(planet_rot.z) + "\n\n"
 		+ "Memory static:   " + str(round(Performance.get_monitor(Performance.MEMORY_STATIC)/1024/1024)) + " MB\n"
 		+ "Memory dynamic:  " + str(round(Performance.get_monitor(Performance.MEMORY_DYNAMIC)/1024/1024)) + " MB\n"
@@ -152,8 +154,8 @@ func _input(event):
 		FpsText.visible = not FpsText.visible
 		show_fps = not show_fps
 	
-func _on_Button_pressed():
-	set_process(not is_processing())
+func _on_BtnPlanetRot_pressed():
+	planet_rotation = not planet_rotation
 
 func _on_item_pressed(ID):
 	resolution = int(popup_mesh_res.get_item_text(ID))
