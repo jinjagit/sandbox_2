@@ -41,9 +41,7 @@ var update_stats_delay = 1000
 var show_fps = true
 
 var popup_mesh_res
-var popup_rot_x
-var popup_rot_y
-var popup_rot_z
+var popup_planet_rot = {"x": null, "y": null, "z": null}
 
 func _init():
 	VisualServer.set_debug_generate_wireframes(true)
@@ -58,17 +56,17 @@ func _ready():
 	popup_mesh_res.add_item("256")
 	popup_mesh_res.connect("id_pressed", self, "_on_item_pressed")
 
-	popup_rot_x = MenuRotX.get_popup()
-	add_rotation_popup_items(popup_rot_x)
-	popup_rot_x.connect("id_pressed", self, "_on_rot_x_pressed")
+	popup_planet_rot.x = MenuRotX.get_popup()
+	add_rotation_popup_items(popup_planet_rot.x)
+	popup_planet_rot.x.connect("id_pressed", self, "_on_rot_x_pressed")
 
-	popup_rot_y = MenuRotY.get_popup()
-	add_rotation_popup_items(popup_rot_y)
-	popup_rot_y.connect("id_pressed", self, "_on_rot_y_pressed")
+	popup_planet_rot.y = MenuRotY.get_popup()
+	add_rotation_popup_items(popup_planet_rot.y)
+	popup_planet_rot.y.connect("id_pressed", self, "_on_rot_y_pressed")
 
-	popup_rot_z = MenuRotZ.get_popup()
-	add_rotation_popup_items(popup_rot_z)
-	popup_rot_z.connect("id_pressed", self, "_on_rot_z_pressed")
+	popup_planet_rot.z = MenuRotZ.get_popup()
+	add_rotation_popup_items(popup_planet_rot.z)
+	popup_planet_rot.z.connect("id_pressed", self, "_on_rot_z_pressed")
 
 func add_rotation_popup_items(popup_var):
 	popup_var.add_item("0.0")
@@ -162,15 +160,15 @@ func _on_item_pressed(ID):
 	generate_sphere()
 
 func _on_rot_x_pressed(ID):
-	planet_rot.x = float(popup_rot_x.get_item_text(ID))
+	planet_rot.x = float(popup_planet_rot.x.get_item_text(ID))
 	update_stats_display()
 
 func _on_rot_y_pressed(ID):
-	planet_rot.y = float(popup_rot_y.get_item_text(ID))
+	planet_rot.y = float(popup_planet_rot.y.get_item_text(ID))
 	update_stats_display()
 
 func _on_rot_z_pressed(ID):
-	planet_rot.z = float(popup_rot_z.get_item_text(ID))
+	planet_rot.z = float(popup_planet_rot.z.get_item_text(ID))
 	update_stats_display()
 
 func _on_ButtonUp_pressed():
