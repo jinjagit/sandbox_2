@@ -22,3 +22,4 @@ In this case the called function set a global variable in the script, but althou
 What I needed to do was introduce another exported global variable, and set it directly via a variable set to the get_node of the target node, then have the physics process in the target node check for that set value constantly, call the local target function if the value is true and immediately set the value back to false. This 'trigger var' pattern seems like it will be useful! (see: CanvasLayerUI.gd)
 
 Jitter: Tried moving planet and camera rotations to physics_process, but seems to make no difference. Maybe will try the smoothing plugin.
+EDIT: Tried the plugin. Not sure it makes much/any difference (but maybe a litle). What seemed to help most was not running with 2 screens (different refresh rates?)

@@ -32,6 +32,7 @@ func _physics_process(delta):
 
 func add_rotation_popup_items(popup_var):
 	popup_var.add_item("0.0")
+	popup_var.add_item("0.25")
 	popup_var.add_item("0.5")
 	popup_var.add_item("1.0")
 	popup_var.add_item("2.0")

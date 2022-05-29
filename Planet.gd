@@ -7,13 +7,13 @@ onready var Right = get_node("./Right")
 onready var Front = get_node("./Front")
 onready var Back = get_node("./Back")
 
-onready var FpsText = get_node("../Control/CanvasLayerFPS/RichTextLabelFPS")
-onready var StatsText = get_node("../Control/CanvasLayer/RichTextLabel")
-onready var Canvas = get_node("../Control/CanvasLayer")
-onready var MenuRes = get_node("../Control/CanvasLayer/VBoxLeft/MenuMeshRes")
-onready var MenuRotX = get_node("../Control/CanvasLayer/VBoxLeft/HBoxAxesRotations/MenuRotX")
-onready var MenuRotY = get_node("../Control/CanvasLayer/VBoxLeft/HBoxAxesRotations/MenuRotY")
-onready var MenuRotZ = get_node("../Control/CanvasLayer/VBoxLeft/HBoxAxesRotations/MenuRotZ")
+onready var FpsText = get_node("../../Control/CanvasLayerFPS/RichTextLabelFPS")
+onready var StatsText = get_node("../../Control/CanvasLayer/RichTextLabel")
+onready var Canvas = get_node("../../Control/CanvasLayer")
+onready var MenuRes = get_node("../../Control/CanvasLayer/VBoxLeft/MenuMeshRes")
+onready var MenuRotX = get_node("../../Control/CanvasLayer/VBoxLeft/HBoxAxesRotations/MenuRotX")
+onready var MenuRotY = get_node("../../Control/CanvasLayer/VBoxLeft/HBoxAxesRotations/MenuRotY")
+onready var MenuRotZ = get_node("../../Control/CanvasLayer/VBoxLeft/HBoxAxesRotations/MenuRotZ")
 
 onready var GenerateFaceMeshData = preload("res://GenerateFaceMeshData.gd").new()
 
@@ -67,6 +67,7 @@ func _ready():
 
 func add_rotation_popup_items(popup_var):
 	popup_var.add_item("0.0")
+	popup_var.add_item("0.25")
 	popup_var.add_item("0.5")
 	popup_var.add_item("1.0")
 	popup_var.add_item("2.0")

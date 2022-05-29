@@ -2,7 +2,7 @@ extends CanvasLayer
 class_name CanvasLayerUI
 
 onready var StatsText = get_node("RichTextLabel")
-onready var Planet = get_node("../../Planet")
+onready var Planet = get_node("../../Smoothing/Planet")
 onready var Camera = get_node("../../CameraPivot")
 
 var update_stats = false

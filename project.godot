@@ -36,6 +36,10 @@ config/name="sandbox_2"
 run/main_scene="res://Main.tscn"
 config/icon="res://assets/images/icon.png"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/smoothing/plugin.cfg" )
+
 [input]
 
 U={
