@@ -5,7 +5,7 @@ onready var MenuCamRotX = get_node("../Control/CanvasLayer/VBoxLeft/HBoxCamRotat
 onready var MenuCamRotY = get_node("../Control/CanvasLayer/VBoxLeft/HBoxCamRotations/MenuCamRotY")
 onready var MenuCamRotZ = get_node("../Control/CanvasLayer/VBoxLeft/HBoxCamRotations/MenuCamRotZ")
 
-export var camera_rot = {"x": 0.0, "y": 1.0, "z": 0.0}
+export var camera_rot = {"x": 0.0, "y": 2.0, "z": 0.0}
 export var camera_rotation = false
 var popup_camera_rot = {"x": null, "y": null, "z": null}
 
@@ -24,8 +24,7 @@ func _ready():
 	add_rotation_popup_items(popup_camera_rot.z)
 	popup_camera_rot.z.connect("id_pressed", self, "_on_cam_rot_z_pressed")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	if camera_rotation == true:
 		rotate_object_local(Vector3(1, 0, 0), (delta/20) * camera_rot.x)
 		rotate_object_local(Vector3(0, 1, 0), (delta/20) * camera_rot.y)

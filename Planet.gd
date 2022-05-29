@@ -74,13 +74,15 @@ func add_rotation_popup_items(popup_var):
 	popup_var.add_item("8.0")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+# func _process(delta):
+# 	pass
+
+func _physics_process(delta):
 	if planet_rotation == true:
 		rotate_object_local(Vector3(1, 0, 0), (delta/20) * planet_rot.x)
 		rotate_object_local(Vector3(0, 1, 0), (delta/20) * planet_rot.y)
 		rotate_object_local(Vector3(0, 0, 1), (delta/20) * planet_rot.z)
 
-func _physics_process(_delta):
 	if show_fps == true:
 		FpsText.text = (
 			"FPS: " + str(Performance.get_monitor(Performance.TIME_FPS)) + "\n\n"
