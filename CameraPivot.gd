@@ -1,12 +1,13 @@
 extends Spatial
 
+onready var Canvas = get_node("../Control/CanvasLayer")
 onready var MenuCamRotX = get_node("../Control/CanvasLayer/VBoxLeft/HBoxCamRotations/MenuCamRotX")
 onready var MenuCamRotY = get_node("../Control/CanvasLayer/VBoxLeft/HBoxCamRotations/MenuCamRotY")
 onready var MenuCamRotZ = get_node("../Control/CanvasLayer/VBoxLeft/HBoxCamRotations/MenuCamRotZ")
 
-var camera_rot = {"x": 0.0, "y": 1.0, "z": 0.0}
+export var camera_rot = {"x": 0.0, "y": 1.0, "z": 0.0}
+export var camera_rotation = false
 var popup_camera_rot = {"x": null, "y": null, "z": null}
-var camera_rotation = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -40,15 +41,16 @@ func add_rotation_popup_items(popup_var):
 
 func _on_BtnCamRot_pressed():
 	camera_rotation = not camera_rotation
+	Canvas.start_update_stats = true
 
 func _on_cam_rot_x_pressed(ID):
 	camera_rot.x = float(popup_camera_rot.x.get_item_text(ID))
-	#update_stats_display()
+	Canvas.start_update_stats = true
 
 func _on_cam_rot_y_pressed(ID):
 	camera_rot.y = float(popup_camera_rot.y.get_item_text(ID))
-	#update_stats_display()
+	Canvas.start_update_stats = true
 
 func _on_cam_rot_z_pressed(ID):
 	camera_rot.z = float(popup_camera_rot.z.get_item_text(ID))
-	#update_stats_display()
+	Canvas.start_update_stats = true

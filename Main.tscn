@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Planet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/fonts/UbuntuMono-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Main.tres" type="Theme" id=3]
-[ext_resource path="res://Camera and lights.gd" type="Script" id=4]
+[ext_resource path="res://CameraPivot.gd" type="Script" id=4]
+[ext_resource path="res://CanvasLayerUI.gd" type="Script" id=5]
 
 [sub_resource type="DynamicFont" id=3]
 size = 20
@@ -73,6 +74,7 @@ anchor_bottom = 1.0
 theme = ExtResource( 3 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Control"]
+script = ExtResource( 5 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Control/CanvasLayer"]
 anchor_left = 0.99
@@ -251,15 +253,15 @@ custom_fonts/normal_font = SubResource( 12 )
 text = "FPS: --"
 scroll_active = false
 
-[node name="Camera and lights" type="Spatial" parent="."]
+[node name="CameraPivot" type="Spatial" parent="."]
 script = ExtResource( 4 )
 
-[node name="Camera" type="Camera" parent="Camera and lights"]
+[node name="Camera" type="Camera" parent="CameraPivot"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
 current = true
 
 [connection signal="pressed" from="Control/CanvasLayer/VBoxLeft/BtnPlanetRot" to="Planet" method="_on_BtnPlanetRot_pressed"]
-[connection signal="pressed" from="Control/CanvasLayer/VBoxLeft/BtnCamRot" to="Camera and lights" method="_on_BtnCamRot_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/VBoxLeft/BtnCamRot" to="CameraPivot" method="_on_BtnCamRot_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/VBoxLeft/HBoxFaces1/ButtonUp" to="Planet" method="_on_ButtonUp_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/VBoxLeft/HBoxFaces1/ButtonDown" to="Planet" method="_on_ButtonDown_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/VBoxLeft/HBoxFaces1/ButtonLeft" to="Planet" method="_on_ButtonLeft_pressed"]

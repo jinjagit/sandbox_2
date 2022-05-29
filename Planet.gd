@@ -17,8 +17,8 @@ onready var MenuRotZ = get_node("../Control/CanvasLayer/VBoxLeft/HBoxAxesRotatio
 
 onready var GenerateFaceMeshData = preload("res://GenerateFaceMeshData.gd").new()
 
-var resolution := 32
-var margin := 3
+export var resolution := 32
+export var margin := 3
 
 var face_normals = {		
 	"up": Vector3(0.0, 1.0, 0.0),
@@ -31,14 +31,10 @@ var face_normals = {
 
 var face_meshes = {"up": null, "down": null, "left": null, "right": null, "front": null, "back": null}
 
-var planet_rot = {"x": 0.0, "y": 1.0, "z": 0.0}
-var planet_rotation = false
+export var planet_rot = {"x": 0.0, "y": 1.0, "z": 0.0}
+export var planet_rotation = false
 
-var bench : String = ''
-var bench_time : float = 0.0
-var update_stats = false
-var update_stats_time = 0
-var update_stats_delay = 1000
+export var bench_time : float = 0.0
 var show_fps = true
 
 var popup_mesh_res
@@ -90,13 +86,6 @@ func _physics_process(_delta):
 			"FPS: " + str(Performance.get_monitor(Performance.TIME_FPS)) + "\n\n"
 		)
 
-	if update_stats == true && update_stats_time > 1 && OS.get_ticks_msec() > update_stats_time + update_stats_delay:
-		update_stats_text()
-		update_stats = false
-
-		if update_stats_delay == 1000:
-			update_stats_delay = 100
-
 func generate_sphere():
 	var startTime = OS.get_ticks_msec()
 
@@ -114,30 +103,7 @@ func generate_sphere():
 	var endTime = OS.get_ticks_msec()
 	bench_time = (endTime - startTime) / 1000.0
 
-	update_stats_display()
-
-func update_stats_display():
-	update_stats_time = OS.get_ticks_msec()
-	update_stats = true
-
-func update_stats_text():
-	bench = "time to render:  %.3f" % bench_time
-	var num_vertices = ((resolution * resolution) + (margin * (resolution - 1) * 4)) * 6
-	var indices : float = Performance.get_monitor(Performance.RENDER_VERTICES_IN_FRAME)
-
-	StatsText.text = (
-		"Planet rotation:\n"
-		+"x: " + str(planet_rot.x) + " y: " + str(planet_rot.y) + " z: " + str(planet_rot.z) + "\n\n"
-		+ "Memory static:   " + str(round(Performance.get_monitor(Performance.MEMORY_STATIC)/1024/1024)) + " MB\n"
-		+ "Memory dynamic:  " + str(round(Performance.get_monitor(Performance.MEMORY_DYNAMIC)/1024/1024)) + " MB\n"
-		+ "Vertex memory:   " + str(round(Performance.get_monitor(Performance.RENDER_VERTEX_MEM_USED)/1024/1024)) + " MB\n"
-		+ "Texture memory:  " + str(round(Performance.get_monitor(Performance.RENDER_TEXTURE_MEM_USED)/1024/1024)) + " MB\n\n"
-		+ "Mesh resolution: " + str(resolution) + "\n"
-		+ "Indices:         " + str(indices) + "\n"
-		+ "Triangles:       " + str(indices / 6)  + "\n"
-		+ "Mesh vertices:   " + str(num_vertices) + "\n\n"
-		+ bench
-	)
+	Canvas.start_update_stats = true
 
 # --------------- UI Actions ------------------------
 
@@ -156,6 +122,7 @@ func _input(event):
 	
 func _on_BtnPlanetRot_pressed():
 	planet_rotation = not planet_rotation
+	Canvas.start_update_stats = true
 
 func _on_item_pressed(ID):
 	resolution = int(popup_mesh_res.get_item_text(ID))
@@ -163,15 +130,15 @@ func _on_item_pressed(ID):
 
 func _on_rot_x_pressed(ID):
 	planet_rot.x = float(popup_planet_rot.x.get_item_text(ID))
-	update_stats_display()
+	Canvas.start_update_stats = true
 
 func _on_rot_y_pressed(ID):
 	planet_rot.y = float(popup_planet_rot.y.get_item_text(ID))
-	update_stats_display()
+	Canvas.start_update_stats = true
 
 func _on_rot_z_pressed(ID):
 	planet_rot.z = float(popup_planet_rot.z.get_item_text(ID))
-	update_stats_display()
+	Canvas.start_update_stats = true
 
 func _on_ButtonUp_pressed():
 	Up.visible = not Up.visible

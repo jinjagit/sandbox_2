@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "CanvasLayer",
+"class": "CanvasLayerUI",
+"language": "GDScript",
+"path": "res://CanvasLayerUI.gd"
+}, {
 "base": "MeshInstance",
 "class": "FaceWithHiddenMargin",
 "language": "GDScript",
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://GenerateFaceMeshData.gd"
 } ]
 _global_script_class_icons={
+"CanvasLayerUI": "",
 "FaceWithHiddenMargin": "",
 "GenerateFaceMeshData": ""
 }
