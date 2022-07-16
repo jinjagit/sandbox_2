@@ -256,6 +256,9 @@ light_color = Color( 0.823529, 0.713726, 0.537255, 1 )
 light_energy = 3.245
 light_indirect_energy = 0.0
 light_specular = 1.433
+light_bake_mode = 2
+directional_shadow_mode = 0
+directional_shadow_depth_range = 1
 
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.35845, 3.58173, 3.45442 )

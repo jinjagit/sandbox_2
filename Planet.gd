@@ -84,10 +84,10 @@ func _physics_process(delta):
 		rotate_object_local(Vector3(0, 1, 0), (delta/20) * planet_rot.y)
 		rotate_object_local(Vector3(0, 0, 1), (delta/20) * planet_rot.z)
 
-	if show_fps == true:
-		FpsText.text = (
-			"FPS: " + str(Performance.get_monitor(Performance.TIME_FPS)) + "\n\n"
-		)
+	# if show_fps == true:
+	# 	FpsText.text = (
+	# 		"FPS: " + str(Performance.get_monitor(Performance.TIME_FPS)) + "\n\n"
+	# 	)
 
 func generate_sphere():
 	var startTime = OS.get_ticks_msec()

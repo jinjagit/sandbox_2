@@ -23,3 +23,7 @@ What I needed to do was introduce another exported global variable, and set it d
 
 Jitter: Tried moving planet and camera rotations to physics_process, but seems to make no difference. Maybe will try the smoothing plugin.
 EDIT: Tried the plugin. Not sure it makes much/any difference (but maybe a litle). What seemed to help most was not running with 2 screens (different refresh rates?)
+https://godotmarketplace.com/shop/smoothing-node/
+https://github.com/lawnjelly/smoothing-addon
+
+EDIT: I noticed that my LG external monitor was stuck at 30Hz, no matter the chosen resolution. After some reading about Macs and monitors, I switched to using a DisplayPort<->USB C cable, and now the jittering and stuttering is greatly reduced, even when spinning a 256x256 vertex faced cubesphere. I also, however, noticed that using the Mac screen as a mirror of the external screen cuases the stutter to return (whereas using it as an extended screen does not). Also, setting the Mac screen as a mirror, but then closing the laptop lid removes the stuttering on the external display. So, probably, it's just some kind of display driver / resource overload issue when trying to run the Mac screen a s a mirror of the external screen. The FPS display conditional check still seems to introduce stutter, even when false! This needs more investigation.
